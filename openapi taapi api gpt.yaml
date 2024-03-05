@@ -1,0 +1,59 @@
+openapi: 3.1.0
+info:
+  title: TAAPI.io API Test
+  description: Fetches technical analysis indicator
+  version: 1.0.0
+servers:
+  - url: https://api.taapi.io
+    description: Main server for TAAPI.io API
+paths:
+  /rsi:
+    get:
+      operationId: getRsi
+      summary: Get the Relative Strength Index (RSI) for a specified cryptocurrency pair and interval.
+      parameters:
+        - in: query
+          name: exchange
+          required: true
+          schema:
+            type: string
+          description: The exchange to fetch data from.
+        - in: query
+          name: symbol
+          required: true
+          schema:
+            type: string
+          description: The cryptocurrency pair to analyze.
+        - in: query
+          name: interval
+          required: true
+          schema:
+            type: string
+          description: The time interval for the RSI calculation.
+      responses:
+        '200':
+          description: Successfully retrieved RSI data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: number
+                    description: The RSI value of the specified cryptocurrency pair.
+                  period:
+                    type: integer
+                    description: The period used for the RSI calculation.
+                  timestamp:
+                    type: integer
+                    format: int64
+                    description: Timestamp of the data.
+security:
+  - ApiKeyAuth: []
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: secret
+  schemas: {}

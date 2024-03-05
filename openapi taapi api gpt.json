@@ -1,0 +1,95 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Cryptocurrency Indicators API",
+    "description": "This API provides access to various cryptocurrency indicators for trading purposes.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.taapi.io/"
+    }
+  ],
+  "paths": {
+    "/rsi": {
+      "get": {
+        "operationId": "getRSI",
+        "summary": "Retrieve RSI (Relative Strength Index) Indicator",
+        "description": "Retrieves the RSI indicator for a specified cryptocurrency pair over a given interval.",
+        "parameters": [
+          {
+            "name": "secret",
+            "in": "query",
+            "description": "API key for authentication.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbHVlIjoiNjVlNGQ1YmUyYzczYzFlM2ZkZmUxZGI4IiwiaWF0IjoxNzA5NDk1Nzk0LCJleHAiOjMzMjEzOTU5Nzk0fQ.rBs80O2Ldtz77LP5WtvsU-3f5ru6UMyvkIVuusN0O-o"
+            }
+          },
+          {
+            "name": "exchange",
+            "in": "query",
+            "description": "The cryptocurrency exchange to query.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "symbol",
+            "in": "query",
+            "description": "The trading symbol to query.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "The interval to query the RSI indicator for.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "type": "number",
+                      "description": "The RSI value."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
